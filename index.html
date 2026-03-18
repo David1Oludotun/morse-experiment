@@ -6,7 +6,6 @@
 <title>Morse Code Learning Study</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --bg: #f0f4ff;
   --card: #ffffff;
@@ -29,7 +28,6 @@
   --radius: 16px;
   --radius-sm: 10px;
 }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
@@ -37,32 +35,24 @@ body {
                     radial-gradient(circle at 80% 80%, #dbeafe 0%, transparent 50%);
   min-height: 100vh;
   display: flex; align-items: flex-start; justify-content: center;
-  padding: 2rem 1rem;
-  color: var(--text);
+  padding: 2rem 1rem; color: var(--text);
 }
-
 #app { width: 100%; max-width: 560px; }
 .screen { display: none; }
 .screen.active { display: block; }
-
 .card {
-  background: var(--card);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2rem; margin-bottom: 1rem;
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 2rem; margin-bottom: 1rem;
   box-shadow: var(--shadow);
 }
-
 h1 { font-size: 26px; font-weight: 700; margin-bottom: 0.4rem; }
 h2 { font-size: 20px; font-weight: 700; margin-bottom: 0.75rem; }
 h3 { font-size: 16px; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
 p  { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.75rem; }
-
 label {
   font-size: 13px; font-weight: 600; color: var(--text);
   display: block; margin-bottom: 5px; margin-top: 16px;
 }
-
 input[type="text"], select {
   width: 100%; padding: 11px 14px; font-size: 14px;
   border: 1.5px solid var(--border); border-radius: var(--radius-sm);
@@ -71,10 +61,8 @@ input[type="text"], select {
   font-family: inherit;
 }
 input[type="text"]:focus, select:focus {
-  border-color: var(--purple);
-  box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+  border-color: var(--purple); box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
 }
-
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 12px 24px; font-size: 15px; font-weight: 600;
@@ -90,60 +78,36 @@ input[type="text"]:focus, select:focus {
 .btn-secondary { background: var(--purple-light); color: var(--purple); }
 .btn-secondary:hover { background: #ddd6fe; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
 .hud { display: flex; gap: 10px; margin-bottom: 1rem; }
 .hud-chip {
-  flex: 1; background: var(--card);
-  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-  padding: 10px 14px; text-align: center; box-shadow: var(--shadow);
+  flex: 1; background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 14px; text-align: center;
+  box-shadow: var(--shadow);
 }
 .hud-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 .hud-value { font-size: 22px; font-weight: 700; line-height: 1.2; margin-top: 2px; }
 .hud-value.xp     { color: var(--purple); }
 .hud-value.streak { color: var(--orange); }
-
 .xp-bar-wrap {
   background: var(--purple-light); border-radius: 50px; height: 10px;
-  margin-bottom: 1.25rem; overflow: hidden;
-  border: 1px solid rgba(124,58,237,0.2);
+  margin-bottom: 1.25rem; overflow: hidden; border: 1px solid rgba(124,58,237,0.2);
 }
 .xp-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--purple), var(--purple-mid));
+  height: 100%; background: linear-gradient(90deg, var(--purple), var(--purple-mid));
   border-radius: 50px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
 }
-
 .trial-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
-
 #flash-box {
-  width: 100px; height: 100px; border-radius: 50%;
+  width: 110px; height: 110px; border-radius: 50%;
   background: var(--purple-light); border: 3px solid rgba(124,58,237,0.2);
-  margin: 0 auto 1.25rem;
-  display: flex; align-items: center; justify-content: center; font-size: 36px;
+  margin: 0 auto 1.5rem;
+  display: flex; align-items: center; justify-content: center; font-size: 38px;
   transition: background 0.04s, border-color 0.04s, transform 0.04s, box-shadow 0.04s;
 }
 #flash-box.lit {
   background: var(--yellow-light); border-color: var(--yellow);
-  transform: scale(1.08); box-shadow: 0 0 28px rgba(245,158,11,0.4);
+  transform: scale(1.1); box-shadow: 0 0 32px rgba(245,158,11,0.45);
 }
-
-.morse-display {
-  display: flex; gap: 10px; justify-content: center;
-  align-items: center; min-height: 44px; margin-bottom: 1.25rem; flex-wrap: wrap;
-}
-.morse-sym {
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 50px; background: var(--purple-light); color: var(--purple);
-  font-weight: 700; font-size: 15px; border: 1.5px solid rgba(124,58,237,0.15);
-  transition: background 0.06s, color 0.06s, transform 0.06s, box-shadow 0.06s;
-}
-.morse-sym.dot  { width: 28px; height: 28px; }
-.morse-sym.dash { width: 52px; height: 28px; }
-.morse-sym.lit  {
-  background: var(--yellow); color: #78350f; border-color: #d97706;
-  transform: scale(1.15); box-shadow: 0 2px 10px rgba(245,158,11,0.4);
-}
-
 #answer-input {
   font-size: 36px; text-align: center; text-transform: uppercase;
   letter-spacing: 8px; padding: 16px; width: 100%;
@@ -153,44 +117,27 @@ input[type="text"]:focus, select:focus {
 }
 #answer-input:focus { border-color: var(--purple); box-shadow: 0 0 0 4px rgba(124,58,237,0.1); }
 #answer-input:disabled { opacity: 0.4; }
-
 #status-line {
   font-size: 14px; font-weight: 600; color: var(--text-muted);
   text-align: center; min-height: 22px; margin-bottom: 1rem;
 }
-
 .feedback {
   display: none; border-radius: var(--radius-sm);
-  font-size: 15px; font-weight: 600; margin-top: 1rem;
-  padding: 14px 16px; text-align: center;
+  font-size: 16px; font-weight: 700; margin-top: 1rem; padding: 16px;
+  text-align: center; line-height: 1.5;
 }
 .feedback.correct   { background: var(--green-light); color: var(--green); }
 .feedback.incorrect { background: var(--red-light);   color: var(--red); }
-
 @keyframes popIn {
-  0%   { transform: scale(0.8); opacity: 0; }
-  60%  { transform: scale(1.05); }
+  0%   { transform: scale(0.85); opacity: 0; }
+  60%  { transform: scale(1.04); }
   100% { transform: scale(1); opacity: 1; }
 }
-.feedback.show { display: block; animation: popIn 0.25s ease forwards; }
-
-.feedback-morse {
-  display: flex; gap: 8px; justify-content: center;
-  align-items: center; margin-top: 10px; flex-wrap: wrap;
-}
-.feedback-sym {
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 50px; font-weight: 700; font-size: 14px;
-}
-.feedback-sym.dot  { width: 26px; height: 26px; }
-.feedback-sym.dash { width: 48px; height: 26px; }
-.feedback-morse.correct-morse .feedback-sym { background: #bbf7d0; color: #065f46; border: 1px solid #6ee7b7; }
-.feedback-morse.incorrect-morse .feedback-sym { background: #fecaca; color: #7f1d1d; border: 1px solid #fca5a5; }
-
+.feedback.show { display: block; animation: popIn 0.2s ease forwards; }
 @keyframes streakPop {
   0%   { transform: scale(0) translateX(-50%); opacity: 0; }
   50%  { transform: scale(1.3) translateX(-50%) translateY(-8px); opacity: 1; }
-  100% { transform: scale(1) translateX(-50%) translateY(-20px); opacity: 0; }
+  100% { transform: scale(1) translateX(-50%) translateY(-22px); opacity: 0; }
 }
 .streak-float {
   position: absolute; top: 16px; left: 50%;
@@ -198,69 +145,52 @@ input[type="text"]:focus, select:focus {
   pointer-events: none; white-space: nowrap;
   animation: streakPop 0.85s ease forwards;
 }
-
 .stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 1rem 0; }
 .stat-card { background: var(--purple-light); border-radius: var(--radius-sm); padding: 1rem; text-align: center; }
 .stat-label { font-size: 11px; font-weight: 600; color: var(--purple); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
 .stat-value { font-size: 24px; font-weight: 700; }
-
 .info-box {
   background: var(--purple-light); color: var(--purple);
   border-radius: var(--radius-sm); padding: 12px 16px;
   font-size: 13px; font-weight: 600; margin-top: 14px;
   border: 1px solid rgba(124,58,237,0.2);
 }
-
-.signal-card {
-  border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 0.75rem;
+.signal-row {
+  display: flex; gap: 12px; margin-bottom: 12px;
+}
+.signal-block {
+  flex: 1; border-radius: var(--radius-sm); padding: 14px 16px;
   border: 1.5px solid var(--border);
 }
-.signal-card.dot-card  { background: var(--blue-light); border-color: rgba(37,99,235,0.2); }
-.signal-card.dash-card { background: var(--yellow-light); border-color: rgba(245,158,11,0.25); }
-
-.signal-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-.dot-card  .signal-title { color: var(--blue); }
-.dash-card .signal-title { color: #92400e; }
-
-.signal-demo {
-  display: flex; gap: 8px; align-items: center; margin-bottom: 6px;
+.signal-block.dot-block  { background: var(--blue-light);   border-color: rgba(37,99,235,0.2); }
+.signal-block.dash-block { background: var(--yellow-light); border-color: rgba(245,158,11,0.25); }
+.signal-block-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.dot-block  .signal-block-title { color: var(--blue); }
+.dash-block .signal-block-title { color: #92400e; }
+.signal-visual { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.demo-dot  { width: 16px; height: 16px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+.demo-dash { width: 40px; height: 16px; border-radius: 50px; background: var(--yellow); flex-shrink: 0; }
+.signal-block-desc { font-size: 12px; line-height: 1.5; }
+.dot-block  .signal-block-desc { color: #1e40af; }
+.dash-block .signal-block-desc { color: #78350f; }
+.condition-tag {
+  display: inline-block; font-size: 12px; font-weight: 700;
+  padding: 4px 14px; border-radius: 50px; margin-bottom: 1rem;
 }
-.demo-dot {
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--blue); display: inline-block;
-}
-.demo-dash {
-  width: 44px; height: 18px; border-radius: 50px;
-  background: var(--yellow); display: inline-block;
-}
-
-.signal-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-.dot-card  .signal-desc { color: #1e40af; }
-.dash-card .signal-desc { color: #78350f; }
-
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tag-av { background: var(--purple-light); color: var(--purple); }
+.tag-a  { background: var(--blue-light);   color: var(--blue); }
+.tag-v  { background: var(--yellow-light); color: #92400e; }
+.divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .chip {
   background: var(--purple-light); color: var(--purple);
   border: 1px solid rgba(124,58,237,0.2); border-radius: 50px;
   padding: 5px 12px; font-size: 13px; font-weight: 600; font-family: monospace;
 }
-
 .submit-status { font-size: 13px; text-align: center; margin-top: 0.75rem; min-height: 18px; color: var(--text-muted); }
 .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
 .title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem; }
 .title-emoji { font-size: 36px; }
-
-.divider {
-  height: 1px; background: var(--border); margin: 1.25rem 0;
-}
-
-.condition-tag {
-  display: inline-block; font-size: 12px; font-weight: 700;
-  padding: 3px 12px; border-radius: 50px; margin-bottom: 1rem;
-}
-.condition-tag.av { background: var(--purple-light); color: var(--purple); }
-.condition-tag.a  { background: var(--blue-light);   color: var(--blue); }
-.condition-tag.v  { background: var(--yellow-light); color: #92400e; }
 </style>
 </head>
 <body>
@@ -269,10 +199,7 @@ input[type="text"]:focus, select:focus {
   <!-- SETUP -->
   <div id="screen-setup" class="screen active">
     <div class="card">
-      <div class="title-row">
-        <span class="title-emoji">&#128225;</span>
-        <h1>Morse code study</h1>
-      </div>
+      <div class="title-row"><span class="title-emoji">&#128225;</span><h1>Morse code study</h1></div>
       <p>Learn to recognise Morse code signals and identify letters as fast as you can. No prior experience needed — that is the whole point!</p>
       <label>Participant ID <span style="font-size:11px;font-weight:400;color:var(--text-muted)">(from your registration email)</span></label>
       <input type="text" id="pid" placeholder="e.g. P001" />
@@ -295,7 +222,7 @@ input[type="text"]:focus, select:focus {
         Condition locked to Audio + Visual for sessions 3 and 4.
       </div>
       <div style="margin-top:1.75rem;">
-        <button class="btn btn-primary" onclick="startPractice()">Let's go!</button>
+        <button class="btn btn-primary" onclick="goToInstructions()">Let's go!</button>
       </div>
     </div>
   </div>
@@ -303,48 +230,35 @@ input[type="text"]:focus, select:focus {
   <!-- INSTRUCTIONS -->
   <div id="screen-instructions" class="screen">
     <div class="card">
-      <div class="title-row">
-        <span class="title-emoji">&#128214;</span>
-        <h2 style="margin:0;">How it works</h2>
+      <div class="title-row"><span class="title-emoji">&#128214;</span><h2 style="margin:0;">How it works</h2></div>
+      <div id="instr-tag"></div>
+      <p id="instr-intro"></p>
+      <div class="signal-row">
+        <div class="signal-block dot-block">
+          <div class="signal-block-title">Short signal — Dot</div>
+          <div class="signal-visual"><div class="demo-dot"></div><span style="font-size:12px;color:#1e40af;">brief</span></div>
+          <div class="signal-block-desc" id="dot-desc"></div>
+        </div>
+        <div class="signal-block dash-block">
+          <div class="signal-block-title">Long signal — Dash</div>
+          <div class="signal-visual"><div class="demo-dash"></div><span style="font-size:12px;color:#78350f;">held</span></div>
+          <div class="signal-block-desc" id="dash-desc"></div>
+        </div>
       </div>
-      <div id="condition-tag-box"></div>
-      <p>Morse code uses two types of signals — a short one and a long one. Each letter is a unique combination of these two signals.</p>
-
-      <div class="signal-card dot-card">
-        <div class="signal-title">Short signal — the Dot</div>
-        <div class="signal-demo"><div class="demo-dot"></div></div>
-        <div class="signal-desc" id="dot-desc"></div>
-      </div>
-
-      <div class="signal-card dash-card">
-        <div class="signal-title">Long signal — the Dash</div>
-        <div class="signal-demo"><div class="demo-dash"></div></div>
-        <div class="signal-desc" id="dash-desc"></div>
-      </div>
-
       <div class="divider"></div>
-
       <h3>The 10 letters you will learn</h3>
-      <p style="margin-bottom:6px;">Each chip shows the letter and its Morse pattern:</p>
+      <p style="font-size:13px;margin-bottom:4px;">Each chip shows the letter and its dot/dash pattern:</p>
       <div class="chips">
-        <span class="chip">E &nbsp;.</span>
-        <span class="chip">T &nbsp;-</span>
-        <span class="chip">I &nbsp;..</span>
-        <span class="chip">A &nbsp;.-</span>
-        <span class="chip">N &nbsp;-.</span>
-        <span class="chip">M &nbsp;--</span>
-        <span class="chip">S &nbsp;...</span>
-        <span class="chip">R &nbsp;.-.</span>
-        <span class="chip">K &nbsp;-.-</span>
-        <span class="chip">F &nbsp;..-.</span>
+        <span class="chip">E .</span><span class="chip">T -</span>
+        <span class="chip">I ..</span><span class="chip">A .-</span>
+        <span class="chip">N -.</span><span class="chip">M --</span>
+        <span class="chip">S ...</span><span class="chip">R .-.</span>
+        <span class="chip">K -.-</span><span class="chip">F ..-.</span>
       </div>
-
       <div class="divider"></div>
-
       <h3>What to do each trial</h3>
-      <p>A signal will play automatically. When it finishes, type the letter you think it was and press Enter. Respond as fast as you can — guessing is absolutely fine!</p>
-      <p>After each answer you will see whether you were right and what the correct pattern was, so you can learn as you go.</p>
-
+      <p id="instr-task"></p>
+      <p>After each answer you will be told the correct letter so you can learn as you go.</p>
       <div style="margin-top:1.5rem;">
         <button class="btn btn-primary" onclick="show('practice')">Got it — start practice!</button>
       </div>
@@ -354,12 +268,9 @@ input[type="text"]:focus, select:focus {
   <!-- PRACTICE INTRO -->
   <div id="screen-practice" class="screen">
     <div class="card">
-      <div class="title-row">
-        <span class="title-emoji">&#127918;</span>
-        <h2 style="margin:0;">Practice round</h2>
-      </div>
-      <p>5 warm-up trials to get used to the format. These are not recorded — no pressure!</p>
-      <p>Remember: type the letter and press Enter after each signal. The Morse pattern will be hidden when you answer so you have to rely on what you heard or saw.</p>
+      <div class="title-row"><span class="title-emoji">&#127918;</span><h2 style="margin:0;">Practice round</h2></div>
+      <p>5 warm-up trials to get used to the signals. These are not recorded — no pressure!</p>
+      <p>When the signal finishes, type the letter you think it is and press <strong>Enter</strong>. Guessing is absolutely fine.</p>
       <div style="margin-top:1.5rem;">
         <button class="btn btn-primary" onclick="startPracticeTrials()">Start practice</button>
       </div>
@@ -369,22 +280,11 @@ input[type="text"]:focus, select:focus {
   <!-- TRIAL -->
   <div id="screen-trial" class="screen">
     <div class="hud">
-      <div class="hud-chip">
-        <div class="hud-label">XP</div>
-        <div class="hud-value xp" id="hud-xp">0</div>
-      </div>
-      <div class="hud-chip">
-        <div class="hud-label">Streak &#128293;</div>
-        <div class="hud-value streak" id="hud-streak">0</div>
-      </div>
-      <div class="hud-chip">
-        <div class="hud-label">Correct</div>
-        <div class="hud-value" id="hud-correct">0</div>
-      </div>
+      <div class="hud-chip"><div class="hud-label">XP</div><div class="hud-value xp" id="hud-xp">0</div></div>
+      <div class="hud-chip"><div class="hud-label">Streak &#128293;</div><div class="hud-value streak" id="hud-streak">0</div></div>
+      <div class="hud-chip"><div class="hud-label">Correct</div><div class="hud-value" id="hud-correct">0</div></div>
     </div>
-    <div class="xp-bar-wrap">
-      <div class="xp-bar-fill" id="xp-bar" style="width:0%"></div>
-    </div>
+    <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xp-bar" style="width:0%"></div></div>
     <div class="trial-meta">
       <span style="font-size:13px;font-weight:600;color:var(--text-muted);" id="trial-counter">Trial 1 of 60</span>
       <span id="block-badge" style="font-size:12px;font-weight:700;background:var(--purple-light);color:var(--purple);padding:4px 14px;border-radius:50px;">Block 1</span>
@@ -392,12 +292,8 @@ input[type="text"]:focus, select:focus {
     <div class="card" style="text-align:center;position:relative;" id="trial-card">
       <div id="flash-box">&#128225;</div>
       <div id="status-line">Get ready...</div>
-      <div class="morse-display" id="morse-display"></div>
       <input type="text" id="answer-input" maxlength="1" placeholder="?" disabled />
-      <div class="feedback" id="feedback">
-        <div id="feedback-text"></div>
-        <div class="feedback-morse" id="feedback-morse"></div>
-      </div>
+      <div class="feedback" id="feedback"></div>
     </div>
   </div>
 
@@ -438,26 +334,25 @@ input[type="text"]:focus, select:focus {
 
 </div>
 <script>
-var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7wkvxtVy1zR3Sbjp6tmrrl79w4f38U5aeTZ5QPEpfLIwba1PL668iJKIBr7J0kmKP/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7wkvxtVy1zR3Sbjp6tmrrl79w4f38U5aeTZ5QPEpfLIwba1PL668iJKIBr7J0kmKP/exec';
 
 var MORSE  = { E:'.',T:'-',I:'..',A:'.-',N:'-.',M:'--',S:'...',R:'.-.',K:'-.-',F:'..-.' };
 var SUBSET = ['E','T','I','A','N','M','S','R','K','F'];
-var CORRECT_MSGS = ['Nice!','Correct!','Yes!','Nailed it!','Boom!'];
 
-var DOT = 150;
-var DASH = DOT * 3;
-var SYM_GAP = DOT;
-var LETTER_GAP = DOT * 3;
+var DOT              = 150;
+var DASH             = DOT * 3;
+var SYM_GAP          = DOT;
+var LETTER_GAP       = DOT * 3;
 var TRIALS_PER_BLOCK = 20;
-var BLOCKS = 3;
-var TOTAL = 60;
-var PRACTICE = 5;
+var BLOCKS           = 3;
+var TOTAL            = 60;
+var PRACTICE         = 5;
 
 var S = {
-  pid: '', session: 1, condition: 'AV',
-  isPractice: false, idx: 0,
-  results: [], letter: '', morseEnd: 0,
-  audioCtx: null, streak: 0, xp: 0, correct: 0
+  pid:'', session:1, condition:'AV',
+  isPractice:false, idx:0,
+  results:[], letter:'', morseEnd:0,
+  audioCtx:null, streak:0, xp:0, correct:0
 };
 
 function handleSessionChange() {
@@ -474,59 +369,71 @@ function getCtx() {
 }
 
 function show(id) {
-  var screens = document.querySelectorAll('.screen');
-  for (var i = 0; i < screens.length; i++) {
-    screens[i].classList.remove('active');
-  }
+  var all = document.querySelectorAll('.screen');
+  for (var i = 0; i < all.length; i++) { all[i].classList.remove('active'); }
   document.getElementById('screen-' + id).classList.add('active');
 }
 
-function startPractice() {
+function goToInstructions() {
   var pid = document.getElementById('pid').value.trim();
   if (!pid) { alert('Please enter your participant ID.'); return; }
   S.pid       = pid;
   S.session   = parseInt(document.getElementById('session-num').value);
   S.condition = S.session >= 3 ? 'AV' : document.getElementById('condition').value;
-  buildInstructionsScreen();
+  buildInstructions();
   show('instructions');
 }
 
-function buildInstructionsScreen() {
+function buildInstructions() {
   var c = S.condition;
 
-  var tagBox = document.getElementById('condition-tag-box');
-  var tagClass = c === 'AV' ? 'av' : (c === 'A' ? 'a' : 'v');
-  var tagLabel = c === 'AV' ? 'Your condition: Audio + Visual' : (c === 'A' ? 'Your condition: Audio only' : 'Your condition: Visual only');
-  tagBox.innerHTML = '<span class="condition-tag ' + tagClass + '">' + tagLabel + '</span>';
+  var tagEl = document.getElementById('instr-tag');
+  var tagClass = c === 'AV' ? 'tag-av' : (c === 'A' ? 'tag-a' : 'tag-v');
+  var tagText  = c === 'AV' ? 'Your condition: Audio + Visual' : (c === 'A' ? 'Your condition: Audio only' : 'Your condition: Visual only');
+  tagEl.innerHTML = '<span class="condition-tag ' + tagClass + '">' + tagText + '</span>';
+
+  var intro = document.getElementById('instr-intro');
+  if (c === 'A') {
+    intro.textContent = 'In your condition you will only hear sounds. There will be no flashing or visual signals at all — just listen carefully.';
+  } else if (c === 'V') {
+    intro.textContent = 'In your condition you will only see the circle flash on screen. There will be no sounds at all — just watch the circle carefully.';
+  } else {
+    intro.textContent = 'In your condition you will both hear sounds and see the circle flash at the same time. Both signals carry the same information.';
+  }
 
   var dotDesc  = document.getElementById('dot-desc');
   var dashDesc = document.getElementById('dash-desc');
 
   if (c === 'A') {
-    dotDesc.textContent  = 'You will hear a short beep. It lasts about 0.15 seconds.';
-    dashDesc.textContent = 'You will hear a long beep. It lasts about 0.45 seconds — three times longer than a dot.';
+    dotDesc.textContent  = 'A short beep — lasts about 0.15 seconds.';
+    dashDesc.textContent = 'A long beep — lasts about 0.45 seconds. Three times longer than a dot.';
   } else if (c === 'V') {
-    dotDesc.textContent  = 'You will see the circle on screen flash briefly. A short, quick flash.';
-    dashDesc.textContent = 'You will see the circle on screen flash for longer. A sustained, held flash — three times longer than a dot.';
+    dotDesc.textContent  = 'A short flash of the circle — brief and quick.';
+    dashDesc.textContent = 'A long flash of the circle — held for longer. Three times longer than a dot flash.';
   } else {
-    dotDesc.textContent  = 'You will hear a short beep AND see the circle flash briefly at the same time.';
-    dashDesc.textContent = 'You will hear a long beep AND see the circle flash for longer at the same time — three times longer than a dot.';
+    dotDesc.textContent  = 'A short beep and a short flash at the same time.';
+    dashDesc.textContent = 'A long beep and a long flash at the same time. Three times longer than a dot.';
+  }
+
+  var task = document.getElementById('instr-task');
+  if (c === 'A') {
+    task.textContent = 'Each trial a Morse signal will play as sound. When it finishes, type the letter you think it was and press Enter. Respond as fast as you can.';
+  } else if (c === 'V') {
+    task.textContent = 'Each trial the circle will flash a Morse signal. When it finishes, type the letter you think it was and press Enter. Respond as fast as you can.';
+  } else {
+    task.textContent = 'Each trial a Morse signal will play as both sound and a flashing circle. When it finishes, type the letter you think it was and press Enter. Respond as fast as you can.';
   }
 }
 
 function startPracticeTrials() {
-  S.isPractice = true;
-  S.idx = 0;
-  show('trial');
-  nextTrial();
+  S.isPractice = true; S.idx = 0;
+  show('trial'); nextTrial();
 }
 
 function startMain() {
-  S.isPractice = false;
-  S.idx = 0; S.results = []; S.streak = 0; S.xp = 0; S.correct = 0;
-  updateHUD();
-  show('trial');
-  nextTrial();
+  S.isPractice = false; S.idx = 0;
+  S.results = []; S.streak = 0; S.xp = 0; S.correct = 0;
+  updateHUD(); show('trial'); nextTrial();
 }
 
 function continueFromBreak() { show('trial'); nextTrial(); }
@@ -542,17 +449,16 @@ function nextTrial() {
   if (!S.isPractice) {
     if (S.idx > 0 && S.idx % TRIALS_PER_BLOCK === 0) {
       var b = S.idx / TRIALS_PER_BLOCK;
-      if (b < BLOCKS) { showBreak(b); return; }
+      if (b < BLOCKS) { showBreakScreen(b); return; }
     }
     if (S.idx >= TOTAL) { showDone(); return; }
   }
   if (S.isPractice && S.idx >= PRACTICE) {
     document.querySelector('#screen-setup .card').innerHTML =
       '<div class="title-row"><span class="title-emoji">&#128640;</span><h1>Ready!</h1></div>' +
-      '<p>Practice done. Now it counts — respond as fast and accurately as you can. Remember the Morse pattern will be hidden when you answer.</p>' +
+      '<p>Practice done. Now it counts — respond as fast and accurately as you can.</p>' +
       '<div style="margin-top:1.5rem;"><button class="btn btn-primary" onclick="startMain()">Begin experiment</button></div>';
-    show('setup');
-    return;
+    show('setup'); return;
   }
 
   S.letter = SUBSET[Math.floor(Math.random() * SUBSET.length)];
@@ -560,32 +466,33 @@ function nextTrial() {
   document.getElementById('trial-counter').textContent = 'Trial ' + (S.idx + 1) + ' of ' + total;
 
   var block = Math.floor(S.idx / TRIALS_PER_BLOCK) + 1;
-  var bb = document.getElementById('block-badge');
+  var bb    = document.getElementById('block-badge');
   if (S.isPractice) {
-    bb.textContent = 'Practice';
-    bb.style.background = '#fef3c7'; bb.style.color = '#92400e';
+    bb.textContent        = 'Practice';
+    bb.style.background   = '#fef3c7';
+    bb.style.color        = '#92400e';
   } else {
-    bb.textContent = 'Block ' + block + ' / ' + BLOCKS;
-    bb.style.background = 'var(--purple-light)'; bb.style.color = 'var(--purple)';
+    bb.textContent        = 'Block ' + block + ' / ' + BLOCKS;
+    bb.style.background   = 'var(--purple-light)';
+    bb.style.color        = 'var(--purple)';
   }
 
   var inp = document.getElementById('answer-input');
   inp.value = ''; inp.disabled = true; inp.style.borderColor = 'var(--border)';
 
   var fb = document.getElementById('feedback');
-  fb.style.display = 'none'; fb.classList.remove('show');
-
-  document.getElementById('morse-display').innerHTML = '';
-  document.getElementById('morse-display').style.visibility = 'visible';
-  document.getElementById('status-line').textContent = 'Listen and watch...';
+  fb.className    = 'feedback';
+  fb.style.display = 'none';
+  fb.innerHTML    = '';
 
   var fbx = document.getElementById('flash-box');
   fbx.classList.remove('lit');
   fbx.innerHTML = '&#128225;';
 
+  document.getElementById('status-line').textContent = 'Listen and watch...';
+
   playMorse(S.letter, function() {
     S.morseEnd = performance.now();
-    document.getElementById('morse-display').style.visibility = 'hidden';
     document.getElementById('status-line').textContent = 'Type the letter and press Enter';
     inp.disabled = false;
     inp.focus();
@@ -594,27 +501,17 @@ function nextTrial() {
 
 function playMorse(letter, onDone) {
   var code = MORSE[letter];
-  var doA  = S.condition === 'A'  || S.condition === 'AV';
-  var doV  = S.condition === 'V'  || S.condition === 'AV';
+  var doA  = (S.condition === 'A'  || S.condition === 'AV');
+  var doV  = (S.condition === 'V'  || S.condition === 'AV');
   var fbx  = document.getElementById('flash-box');
-  var md   = document.getElementById('morse-display');
 
-  var html = '';
-  for (var ci = 0; ci < code.length; ci++) {
-    var cls = code[ci] === '.' ? 'dot' : 'dash';
-    var sym = code[ci] === '.' ? '&middot;' : '&mdash;';
-    html += '<div class="morse-sym ' + cls + '">' + sym + '</div>';
-  }
-  md.innerHTML = html;
-  var syms = md.querySelectorAll('.morse-sym');
-
-  var t = 0;
+  var t       = 0;
   var actions = [];
   for (var i = 0; i < code.length; i++) {
     var dur = code[i] === '.' ? DOT : DASH;
-    actions.push({ time: t, type: 'on',  idx: i, dur: dur });
+    actions.push({ time: t, type: 'on',  dur: dur });
     t += dur;
-    actions.push({ time: t, type: 'off', idx: i });
+    actions.push({ time: t, type: 'off' });
     t += SYM_GAP;
   }
 
@@ -627,10 +524,8 @@ function playMorse(letter, onDone) {
         if (a.type === 'on') {
           if (doV) { fbx.classList.add('lit'); fbx.innerHTML = '&#9889;'; }
           if (doA && ctx) { playTone(ctx, a.dur); }
-          syms[a.idx].classList.add('lit');
         } else {
           if (doV) { fbx.classList.remove('lit'); fbx.innerHTML = '&#128225;'; }
-          syms[a.idx].classList.remove('lit');
         }
       }, a.time);
     })(actions[ai]);
@@ -645,9 +540,8 @@ function playTone(ctx, durationMs) {
   var attack  = Math.min(0.012, dur * 0.08);
   var release = Math.min(0.030, dur * 0.15);
   var sustain = Math.max(0, dur - attack - release);
-
-  var osc  = ctx.createOscillator();
-  var gain = ctx.createGain();
+  var osc     = ctx.createOscillator();
+  var gain    = ctx.createGain();
   osc.connect(gain); gain.connect(ctx.destination);
   osc.type = 'sine';
   osc.frequency.setValueAtTime(700, now);
@@ -667,31 +561,15 @@ document.addEventListener('keydown', function(e) {
   recordAnswer(g);
 });
 
-function buildFeedbackMorse(letter, cssClass) {
-  var code = MORSE[letter];
-  var html = '';
-  for (var i = 0; i < code.length; i++) {
-    var cls = code[i] === '.' ? 'dot' : 'dash';
-    var sym = code[i] === '.' ? '&middot;' : '&mdash;';
-    html += '<div class="feedback-sym ' + cls + '">' + sym + '</div>';
-  }
-  return '<div class="feedback-morse ' + cssClass + '">' + html + '</div>';
-}
-
 function recordAnswer(guess) {
   var rt      = ((performance.now() - S.morseEnd) / 1000).toFixed(3);
-  var correct = guess === S.letter ? 1 : 0;
+  var correct = (guess === S.letter) ? 1 : 0;
   var fb      = document.getElementById('feedback');
   var inp     = document.getElementById('answer-input');
 
-  var feedbackHTML = '';
-
   if (correct) {
-    feedbackHTML  = '<div style="font-size:17px;font-weight:700;margin-bottom:6px;">';
-    feedbackHTML += CORRECT_MSGS[Math.floor(Math.random() * CORRECT_MSGS.length)];
-    feedbackHTML += ' The letter <strong>' + S.letter + '</strong> is:</div>';
-    feedbackHTML += buildFeedbackMorse(S.letter, 'correct-morse');
-    fb.className  = 'feedback correct show';
+    fb.className = 'feedback correct show';
+    fb.innerHTML = 'Correct! The letter was <strong style="font-size:22px;">' + S.letter + '</strong>';
     inp.style.borderColor = '#059669';
     if (!S.isPractice) {
       S.streak++;
@@ -700,16 +578,12 @@ function recordAnswer(guess) {
       if (S.streak >= 3) { showStreakFloat(); }
     }
   } else {
-    feedbackHTML  = '<div style="font-size:17px;font-weight:700;margin-bottom:6px;">';
-    feedbackHTML += 'Not quite! You guessed <strong>' + guess + '</strong>. The letter <strong>' + S.letter + '</strong> is:</div>';
-    feedbackHTML += buildFeedbackMorse(S.letter, 'incorrect-morse');
-    fb.className  = 'feedback incorrect show';
+    fb.className = 'feedback incorrect show';
+    fb.innerHTML = 'Not quite! You guessed <strong>' + guess + '</strong> — the correct letter was <strong style="font-size:22px;">' + S.letter + '</strong>';
     inp.style.borderColor = '#dc2626';
     if (!S.isPractice) { S.streak = 0; }
   }
 
-  fb.innerHTML = feedbackHTML;
-  fb.style.display = 'block';
   inp.disabled = true;
   document.getElementById('status-line').textContent = '';
 
@@ -724,7 +598,7 @@ function recordAnswer(guess) {
       letter:            S.letter,
       guess:             guess,
       correct:           correct,
-      reaction_time_sec: rt,
+      reaction_time_sec: parseFloat(rt),
       timestamp:         new Date().toISOString()
     });
   }
@@ -739,10 +613,10 @@ function showStreakFloat() {
   el.className   = 'streak-float';
   el.textContent = S.streak + ' streak!';
   card.appendChild(el);
-  setTimeout(function() { el.remove(); }, 900);
+  setTimeout(function() { if (el.parentNode) { el.parentNode.removeChild(el); } }, 900);
 }
 
-function showBreak(blockNum) {
+function showBreakScreen(blockNum) {
   var br = [];
   for (var i = 0; i < S.results.length; i++) {
     if (S.results[i].block === blockNum) { br.push(S.results[i]); }
@@ -752,9 +626,9 @@ function showBreak(blockNum) {
   var acc = br.length ? Math.round(correctCount / br.length * 100) : 0;
   var rts = [];
   for (var k = 0; k < br.length; k++) {
-    if (br[k].correct) { rts.push(parseFloat(br[k].reaction_time_sec)); }
+    if (br[k].correct) { rts.push(br[k].reaction_time_sec); }
   }
-  var avgRT = '0s';
+  var avgRT = '—';
   if (rts.length) {
     var sum = 0;
     for (var r = 0; r < rts.length; r++) { sum += rts[r]; }
@@ -773,9 +647,9 @@ function showDone() {
   var acc = total ? Math.round(correct / total * 100) : 0;
   var rts = [];
   for (var j = 0; j < S.results.length; j++) {
-    if (S.results[j].correct) { rts.push(parseFloat(S.results[j].reaction_time_sec)); }
+    if (S.results[j].correct) { rts.push(S.results[j].reaction_time_sec); }
   }
-  var avgRT = '0s';
+  var avgRT = '—';
   if (rts.length) {
     var sum = 0;
     for (var r = 0; r < rts.length; r++) { sum += rts[r]; }
@@ -785,27 +659,34 @@ function showDone() {
   document.getElementById('done-rt').textContent  = avgRT;
   document.getElementById('done-xp').textContent  = S.xp;
   show('done');
-  submitData();
+  submitToSheet();
 }
 
-function submitData() {
+function submitToSheet() {
   var btn = document.getElementById('submit-btn');
   var st  = document.getElementById('submit-status');
+  if (!S.results.length) { st.textContent = 'No data to submit.'; return; }
   btn.disabled   = true;
-  st.textContent = 'Submitting...';
-  fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST', mode: 'no-cors',
+  st.textContent = 'Submitting your data...';
+
+  var payload = JSON.stringify({ rows: S.results });
+
+  fetch(SCRIPT_URL, {
+    method:  'POST',
+    mode:    'no-cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ rows: S.results })
+    body:    payload
   }).then(function() {
     st.style.color = '#059669';
-    st.textContent = 'Data submitted! Thank you';
-  }).catch(function() {
+    st.textContent = 'Data submitted successfully! Thank you.';
+  }).catch(function(err) {
     st.style.color = '#dc2626';
-    st.textContent = 'Submission failed — please download the CSV and send it to the researcher.';
-    btn.disabled = false;
+    st.textContent = 'Submission failed. Please download the CSV backup and send it to the researcher.';
+    btn.disabled   = false;
   });
 }
+
+function submitData() { submitToSheet(); }
 
 function downloadCSV() {
   if (!S.results.length) { alert('No data to download.'); return; }
@@ -813,7 +694,10 @@ function downloadCSV() {
   var rows    = [headers.join(',')];
   for (var i = 0; i < S.results.length; i++) {
     var r = S.results[i];
-    rows.push([r.participant_id,r.session,r.condition,r.trial_index,r.block,r.letter,r.guess,r.correct,r.reaction_time_sec,r.timestamp].join(','));
+    rows.push([
+      r.participant_id, r.session, r.condition, r.trial_index,
+      r.block, r.letter, r.guess, r.correct, r.reaction_time_sec, r.timestamp
+    ].join(','));
   }
   var a      = document.createElement('a');
   a.href     = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' }));
