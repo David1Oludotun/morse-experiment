@@ -21,8 +21,6 @@
   --red-light: #fee2e2;
   --yellow: #f59e0b;
   --yellow-light: #fef3c7;
-  --blue: #2563eb;
-  --blue-light: #dbeafe;
   --orange: #ea580c;
   --border: rgba(124,58,237,0.15);
   --shadow: 0 4px 24px rgba(124,58,237,0.10);
@@ -36,7 +34,9 @@ body {
   background-image: radial-gradient(circle at 20% 20%, #ede9fe 0%, transparent 50%),
                     radial-gradient(circle at 80% 80%, #dbeafe 0%, transparent 50%);
   min-height: 100vh;
-  display: flex; align-items: flex-start; justify-content: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   padding: 2rem 1rem;
   color: var(--text);
 }
@@ -49,7 +49,8 @@ body {
   background: var(--card);
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem; margin-bottom: 1rem;
+  padding: 2rem;
+  margin-bottom: 1rem;
   box-shadow: var(--shadow);
 }
 
@@ -64,7 +65,8 @@ label {
 
 input[type="text"], select {
   width: 100%; padding: 11px 14px; font-size: 14px;
-  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
   background: var(--card); color: var(--text);
   outline: none; transition: border-color 0.15s, box-shadow 0.15s;
   font-family: inherit;
@@ -82,19 +84,22 @@ input[type="text"]:focus, select:focus {
 }
 .btn-primary {
   background: linear-gradient(135deg, #7c3aed, #5b21b6);
-  color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.35);
+  color: white;
+  box-shadow: 0 4px 14px rgba(124,58,237,0.35);
 }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124,58,237,0.45); }
 .btn-primary:active { transform: scale(0.97); }
 .btn-secondary { background: var(--purple-light); color: var(--purple); }
 .btn-secondary:hover { background: #ddd6fe; }
-.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
 .hud { display: flex; gap: 10px; margin-bottom: 1rem; }
 .hud-chip {
   flex: 1; background: var(--card);
-  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-  padding: 10px 14px; text-align: center; box-shadow: var(--shadow);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px; text-align: center;
+  box-shadow: var(--shadow);
 }
 .hud-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 .hud-value { font-size: 22px; font-weight: 700; line-height: 1.2; margin-top: 2px; }
@@ -102,29 +107,37 @@ input[type="text"]:focus, select:focus {
 .hud-value.streak { color: var(--orange); }
 
 .xp-bar-wrap {
-  background: var(--purple-light); border-radius: 50px; height: 10px;
+  background: var(--purple-light);
+  border-radius: 50px; height: 10px;
   margin-bottom: 1.25rem; overflow: hidden;
   border: 1px solid rgba(124,58,237,0.2);
 }
 .xp-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--purple), var(--purple-mid));
-  border-radius: 50px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  border-radius: 50px;
+  transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
 }
 
-.trial-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.trial-meta {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 0.75rem;
+}
 
 #flash-box {
   width: 100px; height: 100px; border-radius: 50%;
-  background: var(--purple-light); border: 3px solid rgba(124,58,237,0.2);
+  background: var(--purple-light);
+  border: 3px solid rgba(124,58,237,0.2);
   margin: 0 auto 1.25rem;
   display: flex; align-items: center; justify-content: center;
   font-size: 36px;
   transition: background 0.04s, border-color 0.04s, transform 0.04s, box-shadow 0.04s;
 }
 #flash-box.lit {
-  background: var(--yellow-light); border-color: var(--yellow);
-  transform: scale(1.08); box-shadow: 0 0 28px rgba(245,158,11,0.4);
+  background: var(--yellow-light);
+  border-color: var(--yellow);
+  transform: scale(1.08);
+  box-shadow: 0 0 28px rgba(245,158,11,0.4);
 }
 
 .morse-display {
@@ -133,7 +146,8 @@ input[type="text"]:focus, select:focus {
 }
 .morse-sym {
   display: flex; align-items: center; justify-content: center;
-  border-radius: 50px; background: var(--purple-light); color: var(--purple);
+  border-radius: 50px;
+  background: var(--purple-light); color: var(--purple);
   font-weight: 700; font-size: 15px;
   border: 1.5px solid rgba(124,58,237,0.15);
   transition: background 0.06s, color 0.06s, transform 0.06s, box-shadow 0.06s;
@@ -146,11 +160,15 @@ input[type="text"]:focus, select:focus {
 }
 
 #answer-input {
-  font-size: 36px; text-align: center; text-transform: uppercase;
-  letter-spacing: 8px; padding: 16px; width: 100%;
-  border: 2.5px solid var(--border); border-radius: var(--radius-sm);
-  font-weight: 700; color: var(--text); background: var(--card);
-  font-family: inherit; transition: border-color 0.15s, box-shadow 0.15s; outline: none;
+  font-size: 36px; text-align: center;
+  text-transform: uppercase; letter-spacing: 8px;
+  padding: 16px; width: 100%;
+  border: 2.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-weight: 700; color: var(--text);
+  background: var(--card); font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
 }
 #answer-input:focus { border-color: var(--purple); box-shadow: 0 0 0 4px rgba(124,58,237,0.1); }
 #answer-input:disabled { opacity: 0.4; }
@@ -161,8 +179,9 @@ input[type="text"]:focus, select:focus {
 }
 
 .feedback {
-  display: none; text-align: center; padding: 12px 16px;
-  border-radius: var(--radius-sm); font-size: 16px; font-weight: 700; margin-top: 1rem;
+  display: none; text-align: center;
+  padding: 12px 16px; border-radius: var(--radius-sm);
+  font-size: 16px; font-weight: 700; margin-top: 1rem;
 }
 .feedback.correct   { background: var(--green-light); color: var(--green); }
 .feedback.incorrect { background: var(--red-light);   color: var(--red); }
@@ -186,8 +205,14 @@ input[type="text"]:focus, select:focus {
   animation: streakPop 0.85s ease forwards;
 }
 
-.stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 1rem 0; }
-.stat-card { background: var(--purple-light); border-radius: var(--radius-sm); padding: 1rem; text-align: center; }
+.stat-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px; margin: 1rem 0;
+}
+.stat-card {
+  background: var(--purple-light);
+  border-radius: var(--radius-sm); padding: 1rem; text-align: center;
+}
 .stat-label { font-size: 11px; font-weight: 600; color: var(--purple); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
 .stat-value { font-size: 24px; font-weight: 700; }
 
@@ -205,7 +230,10 @@ input[type="text"]:focus, select:focus {
   padding: 5px 12px; font-size: 13px; font-weight: 600; font-family: monospace;
 }
 
-.submit-status { font-size: 13px; text-align: center; margin-top: 0.75rem; min-height: 18px; color: var(--text-muted); }
+.submit-status {
+  font-size: 13px; text-align: center;
+  margin-top: 0.75rem; min-height: 18px; color: var(--text-muted);
+}
 .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
 .title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem; }
 .title-emoji { font-size: 36px; }
@@ -214,11 +242,10 @@ input[type="text"]:focus, select:focus {
 <body>
 <div id="app">
 
-  <!-- SETUP -->
   <div id="screen-setup" class="screen active">
     <div class="card">
       <div class="title-row">
-        <span class="title-emoji">📡</span>
+        <span class="title-emoji">&#128225;</span>
         <h1>Morse code study</h1>
       </div>
       <p>Learn to recognise Morse code signals and identify letters as fast as you can. No experience needed — that's the whole point!</p>
@@ -240,38 +267,41 @@ input[type="text"]:focus, select:focus {
         </select>
       </div>
       <div id="condition-locked" class="info-box" style="display:none;">
-        🔒 Condition locked to Audio + Visual for sessions 3 and 4.
+        Condition locked to Audio + Visual for sessions 3 and 4.
       </div>
       <div style="margin-top:1.75rem;">
-        <button class="btn btn-primary" onclick="startPractice()">Let's go! →</button>
+        <button class="btn btn-primary" onclick="startPractice()">Let's go!</button>
       </div>
     </div>
   </div>
 
-  <!-- PRACTICE INTRO -->
   <div id="screen-practice" class="screen">
     <div class="card">
       <div class="title-row">
-        <span class="title-emoji">🎮</span>
+        <span class="title-emoji">&#127918;</span>
         <h2 style="margin:0;">Practice round</h2>
       </div>
       <p>5 warm-up trials — not recorded. Get used to the signals before the real thing starts.</p>
       <p>You are learning these 10 letters:</p>
       <div class="chips">
-        <span class="chip">E ·</span><span class="chip">T —</span>
-        <span class="chip">I ··</span><span class="chip">A ·—</span>
-        <span class="chip">N —·</span><span class="chip">M ——</span>
-        <span class="chip">S ···</span><span class="chip">R ·—·</span>
-        <span class="chip">K —·—</span><span class="chip">F ··—·</span>
+        <span class="chip">E .</span>
+        <span class="chip">T -</span>
+        <span class="chip">I ..</span>
+        <span class="chip">A .-</span>
+        <span class="chip">N -.</span>
+        <span class="chip">M --</span>
+        <span class="chip">S ...</span>
+        <span class="chip">R .-.</span>
+        <span class="chip">K -.-</span>
+        <span class="chip">F ..-.</span>
       </div>
-      <p style="margin-top:1rem;">After each signal, type the letter and press <strong>Enter</strong>. Guessing is fine!</p>
+      <p style="margin-top:1rem;">After each signal, type the letter and press Enter. Guessing is fine!</p>
       <div style="margin-top:1.5rem;">
-        <button class="btn btn-primary" onclick="startPracticeTrials()">Start practice →</button>
+        <button class="btn btn-primary" onclick="startPracticeTrials()">Start practice</button>
       </div>
     </div>
   </div>
 
-  <!-- TRIAL -->
   <div id="screen-trial" class="screen">
     <div class="hud">
       <div class="hud-chip">
@@ -279,7 +309,7 @@ input[type="text"]:focus, select:focus {
         <div class="hud-value xp" id="hud-xp">0</div>
       </div>
       <div class="hud-chip">
-        <div class="hud-label">Streak 🔥</div>
+        <div class="hud-label">Streak</div>
         <div class="hud-value streak" id="hud-streak">0</div>
       </div>
       <div class="hud-chip">
@@ -295,7 +325,7 @@ input[type="text"]:focus, select:focus {
       <span id="block-badge" style="font-size:12px;font-weight:700;background:var(--purple-light);color:var(--purple);padding:4px 14px;border-radius:50px;">Block 1</span>
     </div>
     <div class="card" style="text-align:center;position:relative;" id="trial-card">
-      <div id="flash-box">📡</div>
+      <div id="flash-box">&#128225;</div>
       <div id="status-line">Get ready...</div>
       <div class="morse-display" id="morse-display"></div>
       <input type="text" id="answer-input" maxlength="1" placeholder="?" disabled />
@@ -303,31 +333,29 @@ input[type="text"]:focus, select:focus {
     </div>
   </div>
 
-  <!-- BREAK -->
   <div id="screen-break" class="screen">
     <div class="card" style="text-align:center;">
-      <div style="font-size:48px;margin-bottom:0.75rem;">☕</div>
+      <div style="font-size:48px;margin-bottom:0.75rem;">&#9749;</div>
       <h2>Block complete!</h2>
       <p>Take a short breather — you are doing great.</p>
       <div class="stat-grid">
-        <div class="stat-card"><div class="stat-label">Accuracy</div><div class="stat-value" id="break-acc">—</div></div>
-        <div class="stat-card"><div class="stat-label">Avg RT</div><div class="stat-value" id="break-rt">—</div></div>
+        <div class="stat-card"><div class="stat-label">Accuracy</div><div class="stat-value" id="break-acc">0%</div></div>
+        <div class="stat-card"><div class="stat-label">Avg RT</div><div class="stat-value" id="break-rt">0s</div></div>
         <div class="stat-card"><div class="stat-label">Block</div><div class="stat-value" id="break-block">1/3</div></div>
       </div>
-      <button class="btn btn-primary" onclick="continueFromBreak()" style="margin-top:0.5rem;">Keep going →</button>
+      <button class="btn btn-primary" onclick="continueFromBreak()" style="margin-top:0.5rem;">Keep going</button>
     </div>
   </div>
 
-  <!-- DONE -->
   <div id="screen-done" class="screen">
     <div class="card" style="text-align:center;">
-      <div style="font-size:52px;margin-bottom:0.75rem;">🎉</div>
+      <div style="font-size:52px;margin-bottom:0.75rem;">&#127881;</div>
       <h2>Session complete!</h2>
       <p>Awesome work. Here is how you did this session.</p>
       <div class="stat-grid">
-        <div class="stat-card"><div class="stat-label">Accuracy</div><div class="stat-value" id="done-acc">—</div></div>
-        <div class="stat-card"><div class="stat-label">Avg RT</div><div class="stat-value" id="done-rt">—</div></div>
-        <div class="stat-card"><div class="stat-label">XP earned</div><div class="stat-value" id="done-xp" style="color:var(--purple);">—</div></div>
+        <div class="stat-card"><div class="stat-label">Accuracy</div><div class="stat-value" id="done-acc">0%</div></div>
+        <div class="stat-card"><div class="stat-label">Avg RT</div><div class="stat-value" id="done-rt">0s</div></div>
+        <div class="stat-card"><div class="stat-label">XP earned</div><div class="stat-value" id="done-xp" style="color:var(--purple);">0</div></div>
       </div>
       <p style="margin-top:0.75rem;font-size:13px;">Check your email for your next session link.</p>
       <div class="btn-row">
@@ -340,262 +368,374 @@ input[type="text"]:focus, select:focus {
 
 </div>
 <script>
-const GOOGLE_SCRIPT_URL = https://script.google.com/macros/s/AKfycbxJ6wnRz7r2BJq2PwWCex7hQQd9riPP4CU05-BIWqyDKo6gQVNfQ3v0vQ19c5EzORRd/exec;
+var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJ6wnRz7r2BJq2PwWCex7hQQd9riPP4CU05-BIWqyDKo6gQVNfQ3v0vQ19c5EzORRd/exec';
 
-const MORSE  = { E:'.',T:'-',I:'..',A:'.-',N:'-.',M:'--',S:'...',R:'.-.',K:'-.-',F:'..-.' };
-const SUBSET = Object.keys(MORSE);
-const CORRECT_MSGS = ['Nice! ✨','Correct! 🎯','Yes! 🔥','Nailed it! ⚡','Boom! 💥'];
+var MORSE = { E:'.',T:'-',I:'..',A:'.-',N:'-.',M:'--',S:'...',R:'.-.',K:'-.-',F:'..-.' };
+var SUBSET = ['E','T','I','A','N','M','S','R','K','F'];
+var CORRECT_MSGS = ['Nice!','Correct!','Yes!','Nailed it!','Boom!'];
 
-const DOT=150, DASH=DOT*3, SYM_GAP=DOT, LETTER_GAP=DOT*3;
-const TRIALS_PER_BLOCK=20, BLOCKS=3, TOTAL=60, PRACTICE=5;
+var DOT = 150;
+var DASH = DOT * 3;
+var SYM_GAP = DOT;
+var LETTER_GAP = DOT * 3;
+var TRIALS_PER_BLOCK = 20;
+var BLOCKS = 3;
+var TOTAL = 60;
+var PRACTICE = 5;
 
-let S = { pid:'',session:1,condition:'AV',isPractice:false,idx:0,
-          results:[],letter:'',morseEnd:0,audioCtx:null,streak:0,xp:0,correct:0 };
+var S = {
+  pid: '',
+  session: 1,
+  condition: 'AV',
+  isPractice: false,
+  idx: 0,
+  results: [],
+  letter: '',
+  morseEnd: 0,
+  audioCtx: null,
+  streak: 0,
+  xp: 0,
+  correct: 0
+};
 
 function handleSessionChange() {
-  const s = parseInt(document.getElementById('session-num').value);
-  document.getElementById('condition-area').style.display   = s>=3?'none':'block';
-  document.getElementById('condition-locked').style.display = s>=3?'block':'none';
+  var s = parseInt(document.getElementById('session-num').value);
+  document.getElementById('condition-area').style.display = s >= 3 ? 'none' : 'block';
+  document.getElementById('condition-locked').style.display = s >= 3 ? 'block' : 'none';
 }
 
 function getCtx() {
-  if (!S.audioCtx) S.audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  if (!S.audioCtx) {
+    S.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
   return S.audioCtx;
 }
 
 function show(id) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-'+id).classList.add('active');
+  var screens = document.querySelectorAll('.screen');
+  for (var i = 0; i < screens.length; i++) {
+    screens[i].classList.remove('active');
+  }
+  document.getElementById('screen-' + id).classList.add('active');
 }
 
 function startPractice() {
-  const pid = document.getElementById('pid').value.trim();
-  if (!pid) { alert('Please enter your participant ID.'); return; }
-  S.pid=pid;
-  S.session=parseInt(document.getElementById('session-num').value);
-  S.condition=S.session>=3?'AV':document.getElementById('condition').value;
+  var pid = document.getElementById('pid').value.trim();
+  if (!pid) {
+    alert('Please enter your participant ID.');
+    return;
+  }
+  S.pid = pid;
+  S.session = parseInt(document.getElementById('session-num').value);
+  S.condition = S.session >= 3 ? 'AV' : document.getElementById('condition').value;
   show('practice');
 }
 
-function startPracticeTrials() { S.isPractice=true; S.idx=0; show('trial'); nextTrial(); }
-
-function startMain() {
-  S.isPractice=false; S.idx=0; S.results=[]; S.streak=0; S.xp=0; S.correct=0;
-  updateHUD(); show('trial'); nextTrial();
+function startPracticeTrials() {
+  S.isPractice = true;
+  S.idx = 0;
+  show('trial');
+  nextTrial();
 }
 
-function continueFromBreak() { show('trial'); nextTrial(); }
+function startMain() {
+  S.isPractice = false;
+  S.idx = 0;
+  S.results = [];
+  S.streak = 0;
+  S.xp = 0;
+  S.correct = 0;
+  updateHUD();
+  show('trial');
+  nextTrial();
+}
+
+function continueFromBreak() {
+  show('trial');
+  nextTrial();
+}
 
 function updateHUD() {
-  document.getElementById('hud-xp').textContent      = S.xp;
-  document.getElementById('hud-streak').textContent  = S.streak;
+  document.getElementById('hud-xp').textContent = S.xp;
+  document.getElementById('hud-streak').textContent = S.streak;
   document.getElementById('hud-correct').textContent = S.correct;
-  document.getElementById('xp-bar').style.width      = (S.xp % 100)+'%';
+  document.getElementById('xp-bar').style.width = (S.xp % 100) + '%';
 }
 
 function nextTrial() {
   if (!S.isPractice) {
-    if (S.idx>0 && S.idx%TRIALS_PER_BLOCK===0) {
-      const b=S.idx/TRIALS_PER_BLOCK;
-      if (b<BLOCKS) { showBreak(b); return; }
+    if (S.idx > 0 && S.idx % TRIALS_PER_BLOCK === 0) {
+      var b = S.idx / TRIALS_PER_BLOCK;
+      if (b < BLOCKS) {
+        showBreak(b);
+        return;
+      }
     }
-    if (S.idx>=TOTAL) { showDone(); return; }
+    if (S.idx >= TOTAL) {
+      showDone();
+      return;
+    }
   }
-  if (S.isPractice && S.idx>=PRACTICE) {
-    document.querySelector('#screen-setup .card').innerHTML=`
-      <div class="title-row"><span class="title-emoji">🚀</span><h1>Ready!</h1></div>
-      <p>Practice done. Now it counts — type each letter as fast and accurately as you can.</p>
-      <div style="margin-top:1.5rem;"><button class="btn btn-primary" onclick="startMain()">Begin experiment →</button></div>`;
-    show('setup'); return;
+  if (S.isPractice && S.idx >= PRACTICE) {
+    document.querySelector('#screen-setup .card').innerHTML = '<div class="title-row"><span class="title-emoji">&#128640;</span><h1>Ready!</h1></div><p>Practice done. Now it counts — type each letter as fast and accurately as you can.</p><div style="margin-top:1.5rem;"><button class="btn btn-primary" onclick="startMain()">Begin experiment</button></div>';
+    show('setup');
+    return;
   }
 
-  S.letter = SUBSET[Math.floor(Math.random()*SUBSET.length)];
-  const total = S.isPractice ? PRACTICE : TOTAL;
-  document.getElementById('trial-counter').textContent = `Trial ${S.idx+1} of ${total}`;
+  S.letter = SUBSET[Math.floor(Math.random() * SUBSET.length)];
+  var total = S.isPractice ? PRACTICE : TOTAL;
+  document.getElementById('trial-counter').textContent = 'Trial ' + (S.idx + 1) + ' of ' + total;
 
-  const block = Math.floor(S.idx/TRIALS_PER_BLOCK)+1;
-  const bb = document.getElementById('block-badge');
-  if (S.isPractice) { bb.textContent='✨ Practice'; bb.style.background='#fef3c7'; bb.style.color='#92400e'; }
-  else              { bb.textContent=`Block ${block} / ${BLOCKS}`; bb.style.background='var(--purple-light)'; bb.style.color='var(--purple)'; }
+  var block = Math.floor(S.idx / TRIALS_PER_BLOCK) + 1;
+  var bb = document.getElementById('block-badge');
+  if (S.isPractice) {
+    bb.textContent = 'Practice';
+    bb.style.background = '#fef3c7';
+    bb.style.color = '#92400e';
+  } else {
+    bb.textContent = 'Block ' + block + ' / ' + BLOCKS;
+    bb.style.background = 'var(--purple-light)';
+    bb.style.color = 'var(--purple)';
+  }
 
-  const inp = document.getElementById('answer-input');
-  inp.value=''; inp.disabled=true; inp.style.borderColor='var(--border)';
-  const fb = document.getElementById('feedback');
-  fb.style.display='none'; fb.classList.remove('show');
-  document.getElementById('morse-display').innerHTML='';
-  document.getElementById('status-line').textContent='Listen and watch...';
-  const fbx = document.getElementById('flash-box');
-  fbx.classList.remove('lit'); fbx.textContent='📡';
+  var inp = document.getElementById('answer-input');
+  inp.value = '';
+  inp.disabled = true;
+  inp.style.borderColor = 'var(--border)';
 
-  playMorse(S.letter, ()=>{
-    S.morseEnd=performance.now();
-    document.getElementById('status-line').textContent='Type the letter → press Enter';
-    inp.disabled=false; inp.focus();
+  var fb = document.getElementById('feedback');
+  fb.style.display = 'none';
+  fb.classList.remove('show');
+
+  document.getElementById('morse-display').innerHTML = '';
+  document.getElementById('status-line').textContent = 'Listen and watch...';
+
+  var fbx = document.getElementById('flash-box');
+  fbx.classList.remove('lit');
+  fbx.textContent = '&#128225;';
+  fbx.innerHTML = '&#128225;';
+
+  playMorse(S.letter, function() {
+    S.morseEnd = performance.now();
+    document.getElementById('status-line').textContent = 'Type the letter and press Enter';
+    inp.disabled = false;
+    inp.focus();
   });
 }
 
 function playMorse(letter, onDone) {
-  const code=MORSE[letter];
-  const doA=S.condition==='A'||S.condition==='AV';
-  const doV=S.condition==='V'||S.condition==='AV';
-  const fbx=document.getElementById('flash-box');
-  const md =document.getElementById('morse-display');
+  var code = MORSE[letter];
+  var doA = S.condition === 'A' || S.condition === 'AV';
+  var doV = S.condition === 'V' || S.condition === 'AV';
+  var fbx = document.getElementById('flash-box');
+  var md  = document.getElementById('morse-display');
 
-  md.innerHTML=code.split('').map(c=>`<div class="morse-sym ${c==='.'?'dot':'dash'}">${c==='.'?'·':'—'}</div>`).join('');
-  const syms=md.querySelectorAll('.morse-sym');
+  var html = '';
+  for (var ci = 0; ci < code.length; ci++) {
+    var cls = code[ci] === '.' ? 'dot' : 'dash';
+    var sym = code[ci] === '.' ? '&middot;' : '&mdash;';
+    html += '<div class="morse-sym ' + cls + '">' + sym + '</div>';
+  }
+  md.innerHTML = html;
+  var syms = md.querySelectorAll('.morse-sym');
 
-  let t=0; const actions=[];
-  for(let i=0;i<code.length;i++){
-    const dur=code[i]==='.'?DOT:DASH;
-    actions.push({time:t,type:'on',i,dur}); t+=dur;
-    actions.push({time:t,type:'off',i});    t+=SYM_GAP;
+  var t = 0;
+  var actions = [];
+  for (var i = 0; i < code.length; i++) {
+    var dur = code[i] === '.' ? DOT : DASH;
+    actions.push({ time: t, type: 'on',  idx: i, dur: dur });
+    t += dur;
+    actions.push({ time: t, type: 'off', idx: i });
+    t += SYM_GAP;
   }
 
-  let ctx; if(doA){try{ctx=getCtx();}catch(e){}}
+  var ctx = null;
+  if (doA) {
+    try { ctx = getCtx(); } catch(e) {}
+  }
 
-  actions.forEach(a=>{
-    setTimeout(()=>{
-      if(a.type==='on'){
-        if(doV){fbx.classList.add('lit');fbx.textContent='⚡';}
-        if(doA&&ctx) playTone(ctx,a.dur);
-        syms[a.i].classList.add('lit');
-      } else {
-        if(doV){fbx.classList.remove('lit');fbx.textContent='📡';}
-        syms[a.i].classList.remove('lit');
-      }
-    }, a.time);
-  });
+  for (var ai = 0; ai < actions.length; ai++) {
+    (function(a) {
+      setTimeout(function() {
+        if (a.type === 'on') {
+          if (doV) { fbx.classList.add('lit'); fbx.innerHTML = '&#9889;'; }
+          if (doA && ctx) { playTone(ctx, a.dur); }
+          syms[a.idx].classList.add('lit');
+        } else {
+          if (doV) { fbx.classList.remove('lit'); fbx.innerHTML = '&#128225;'; }
+          syms[a.idx].classList.remove('lit');
+        }
+      }, a.time);
+    })(actions[ai]);
+  }
 
-  setTimeout(onDone, t+LETTER_GAP);
+  setTimeout(onDone, t + LETTER_GAP);
 }
 
 function playTone(ctx, durationMs) {
-  const dur=durationMs/1000;
-  const now=ctx.currentTime;
-  const attack =Math.min(0.012, dur*0.08);
-  const release=Math.min(0.030, dur*0.15);
-  const sustain=Math.max(0, dur-attack-release);
+  var dur = durationMs / 1000;
+  var now = ctx.currentTime;
+  var attack  = Math.min(0.012, dur * 0.08);
+  var release = Math.min(0.030, dur * 0.15);
+  var sustain = Math.max(0, dur - attack - release);
 
-  const osc=ctx.createOscillator();
-  const gain=ctx.createGain();
-  osc.connect(gain); gain.connect(ctx.destination);
+  var osc  = ctx.createOscillator();
+  var gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
 
-  osc.type='sine';
+  osc.type = 'sine';
   osc.frequency.setValueAtTime(700, now);
 
   gain.gain.setValueAtTime(0, now);
-  gain.gain.linearRampToValueAtTime(0.5, now+attack);
-  gain.gain.setValueAtTime(0.5, now+attack+sustain);
-  gain.gain.linearRampToValueAtTime(0, now+attack+sustain+release);
+  gain.gain.linearRampToValueAtTime(0.5, now + attack);
+  gain.gain.setValueAtTime(0.5, now + attack + sustain);
+  gain.gain.linearRampToValueAtTime(0, now + attack + sustain + release);
 
   osc.start(now);
-  osc.stop(now+dur+0.02);
+  osc.stop(now + dur + 0.02);
 }
 
-document.addEventListener('keydown', e=>{
-  const inp=document.getElementById('answer-input');
-  if(inp.disabled||e.key!=='Enter') return;
-  const g=inp.value.toUpperCase().trim();
-  if(g.length!==1||!/[A-Z]/.test(g)) return;
+document.addEventListener('keydown', function(e) {
+  var inp = document.getElementById('answer-input');
+  if (inp.disabled || e.key !== 'Enter') return;
+  var g = inp.value.toUpperCase().trim();
+  if (g.length !== 1 || !/[A-Z]/.test(g)) return;
   recordAnswer(g);
 });
 
 function recordAnswer(guess) {
-  const rt=((performance.now()-S.morseEnd)/1000).toFixed(3);
-  const correct=guess===S.letter?1:0;
-  const fb=document.getElementById('feedback');
-  const inp=document.getElementById('answer-input');
+  var rt = ((performance.now() - S.morseEnd) / 1000).toFixed(3);
+  var correct = guess === S.letter ? 1 : 0;
+  var fb  = document.getElementById('feedback');
+  var inp = document.getElementById('answer-input');
 
-  if(correct){
-    fb.textContent=CORRECT_MSGS[Math.floor(Math.random()*CORRECT_MSGS.length)];
-    fb.className='feedback correct show';
-    inp.style.borderColor='#059669';
-    if(!S.isPractice){
-      S.streak++; S.xp+=10+(S.streak>=3?5:0); S.correct++;
-      if(S.streak>=3) showStreakFloat();
+  if (correct) {
+    fb.textContent = CORRECT_MSGS[Math.floor(Math.random() * CORRECT_MSGS.length)];
+    fb.className = 'feedback correct show';
+    inp.style.borderColor = '#059669';
+    if (!S.isPractice) {
+      S.streak++;
+      S.xp += 10 + (S.streak >= 3 ? 5 : 0);
+      S.correct++;
+      if (S.streak >= 3) { showStreakFloat(); }
     }
   } else {
-    fb.textContent=`Not quite — it was "${S.letter}"  (${MORSE[S.letter]})`;
-    fb.className='feedback incorrect show';
-    inp.style.borderColor='#dc2626';
-    if(!S.isPractice) S.streak=0;
+    fb.textContent = 'Not quite — it was "' + S.letter + '"  (' + MORSE[S.letter] + ')';
+    fb.className = 'feedback incorrect show';
+    inp.style.borderColor = '#dc2626';
+    if (!S.isPractice) { S.streak = 0; }
   }
 
-  inp.disabled=true;
-  document.getElementById('status-line').textContent='';
-  if(!S.isPractice){
+  inp.disabled = true;
+  document.getElementById('status-line').textContent = '';
+
+  if (!S.isPractice) {
     updateHUD();
     S.results.push({
-      participant_id:S.pid,session:S.session,condition:S.condition,
-      trial_index:S.idx+1,block:Math.floor(S.idx/TRIALS_PER_BLOCK)+1,
-      letter:S.letter,guess,correct,
-      reaction_time_sec:rt,timestamp:new Date().toISOString()
+      participant_id:    S.pid,
+      session:           S.session,
+      condition:         S.condition,
+      trial_index:       S.idx + 1,
+      block:             Math.floor(S.idx / TRIALS_PER_BLOCK) + 1,
+      letter:            S.letter,
+      guess:             guess,
+      correct:           correct,
+      reaction_time_sec: rt,
+      timestamp:         new Date().toISOString()
     });
   }
+
   S.idx++;
-  setTimeout(nextTrial,1200);
+  setTimeout(nextTrial, 1200);
 }
 
 function showStreakFloat() {
-  const card=document.getElementById('trial-card');
-  const el=document.createElement('div');
-  el.className='streak-float';
-  el.textContent=`🔥 ${S.streak} streak!`;
+  var card = document.getElementById('trial-card');
+  var el = document.createElement('div');
+  el.className = 'streak-float';
+  el.textContent = S.streak + ' streak!';
   card.appendChild(el);
-  setTimeout(()=>el.remove(),900);
+  setTimeout(function() { el.remove(); }, 900);
 }
 
 function showBreak(blockNum) {
-  const br=S.results.filter(r=>r.block===blockNum);
-  const acc=br.length?Math.round(br.filter(r=>r.correct).length/br.length*100):0;
-  const rts=br.filter(r=>r.correct).map(r=>parseFloat(r.reaction_time_sec));
-  const avgRT=rts.length?(rts.reduce((a,b)=>a+b,0)/rts.length).toFixed(2)+'s':'—';
-  document.getElementById('break-acc').textContent=acc+'%';
-  document.getElementById('break-rt').textContent=avgRT;
-  document.getElementById('break-block').textContent=blockNum+'/'+BLOCKS;
+  var br = [];
+  for (var i = 0; i < S.results.length; i++) {
+    if (S.results[i].block === blockNum) { br.push(S.results[i]); }
+  }
+  var correctCount = 0;
+  for (var j = 0; j < br.length; j++) { if (br[j].correct) correctCount++; }
+  var acc = br.length ? Math.round(correctCount / br.length * 100) : 0;
+  var rts = [];
+  for (var k = 0; k < br.length; k++) {
+    if (br[k].correct) { rts.push(parseFloat(br[k].reaction_time_sec)); }
+  }
+  var avgRT = '0s';
+  if (rts.length) {
+    var sum = 0;
+    for (var r = 0; r < rts.length; r++) { sum += rts[r]; }
+    avgRT = (sum / rts.length).toFixed(2) + 's';
+  }
+  document.getElementById('break-acc').textContent   = acc + '%';
+  document.getElementById('break-rt').textContent    = avgRT;
+  document.getElementById('break-block').textContent = blockNum + '/' + BLOCKS;
   show('break');
 }
 
 function showDone() {
-  const total=S.results.length;
-  const correct=S.results.filter(r=>r.correct).length;
-  const acc=total?Math.round(correct/total*100):0;
-  const rts=S.results.filter(r=>r.correct).map(r=>parseFloat(r.reaction_time_sec));
-  const avgRT=rts.length?(rts.reduce((a,b)=>a+b,0)/rts.length).toFixed(2)+'s':'—';
-  document.getElementById('done-acc').textContent=acc+'%';
-  document.getElementById('done-rt').textContent=avgRT;
-  document.getElementById('done-xp').textContent=S.xp;
-  show('done'); submitData();
+  var total   = S.results.length;
+  var correct = 0;
+  for (var i = 0; i < S.results.length; i++) { if (S.results[i].correct) correct++; }
+  var acc = total ? Math.round(correct / total * 100) : 0;
+  var rts = [];
+  for (var j = 0; j < S.results.length; j++) {
+    if (S.results[j].correct) { rts.push(parseFloat(S.results[j].reaction_time_sec)); }
+  }
+  var avgRT = '0s';
+  if (rts.length) {
+    var sum = 0;
+    for (var r = 0; r < rts.length; r++) { sum += rts[r]; }
+    avgRT = (sum / rts.length).toFixed(2) + 's';
+  }
+  document.getElementById('done-acc').textContent = acc + '%';
+  document.getElementById('done-rt').textContent  = avgRT;
+  document.getElementById('done-xp').textContent  = S.xp;
+  show('done');
+  submitData();
 }
 
-async function submitData() {
-  const btn=document.getElementById('submit-btn');
-  const st=document.getElementById('submit-status');
-  if(GOOGLE_SCRIPT_URL==='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){
-    st.textContent='No submission URL set yet — use the CSV backup.'; return;
-  }
-  btn.disabled=true; st.textContent='Submitting...';
-  try {
-    await fetch(GOOGLE_SCRIPT_URL,{
-      method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({rows:S.results})
-    });
-    st.style.color='#059669'; st.textContent='Data submitted! Thank you 🎉';
-  } catch(err) {
-    st.style.color='#dc2626';
-    st.textContent='Submission failed — please download the CSV and send it to the researcher.';
-    btn.disabled=false;
-  }
+function submitData() {
+  var btn = document.getElementById('submit-btn');
+  var st  = document.getElementById('submit-status');
+  btn.disabled = true;
+  st.textContent = 'Submitting...';
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ rows: S.results })
+  }).then(function() {
+    st.style.color = '#059669';
+    st.textContent = 'Data submitted! Thank you';
+  }).catch(function() {
+    st.style.color = '#dc2626';
+    st.textContent = 'Submission failed — please download the CSV and send it to the researcher.';
+    btn.disabled = false;
+  });
 }
 
 function downloadCSV() {
-  if(!S.results.length){alert('No data to download.');return;}
-  const headers=Object.keys(S.results[0]);
-  const rows=S.results.map(r=>headers.map(h=>r[h]).join(','));
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([[headers.join(','),...rows].join('\n')],{type:'text/csv'}));
-  a.download=`morse_${S.pid}_session${S.session}.csv`;
+  if (!S.results.length) { alert('No data to download.'); return; }
+  var headers = ['participant_id','session','condition','trial_index','block','letter','guess','correct','reaction_time_sec','timestamp'];
+  var rows = [headers.join(',')];
+  for (var i = 0; i < S.results.length; i++) {
+    var r = S.results[i];
+    rows.push([r.participant_id,r.session,r.condition,r.trial_index,r.block,r.letter,r.guess,r.correct,r.reaction_time_sec,r.timestamp].join(','));
+  }
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' }));
+  a.download = 'morse_' + S.pid + '_session' + S.session + '.csv';
   a.click();
 }
 </script>
