@@ -97,26 +97,22 @@ input[type="text"]:focus, select:focus {
   border-radius: 50px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
 }
 .trial-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
-
-/* Flash circle — used in V and AV conditions */
 #flash-circle {
   width: 110px; height: 110px; border-radius: 50%;
   background: var(--purple-light); border: 3px solid rgba(124,58,237,0.2);
   margin: 0 auto 1.5rem;
   transition: background 0.04s, border-color 0.04s, transform 0.04s, box-shadow 0.04s;
+  display: none;
 }
 #flash-circle.lit {
   background: var(--yellow-light); border-color: var(--yellow);
   transform: scale(1.1); box-shadow: 0 0 32px rgba(245,158,11,0.45);
 }
-
-/* Static circle — used in A-only condition, never changes */
 #static-circle {
   width: 110px; height: 110px; border-radius: 50%;
   background: var(--purple-light); border: 3px solid rgba(124,58,237,0.2);
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1.5rem; display: none;
 }
-
 #answer-input {
   font-size: 36px; text-align: center; text-transform: uppercase;
   letter-spacing: 8px; padding: 16px; width: 100%;
@@ -132,17 +128,26 @@ input[type="text"]:focus, select:focus {
 }
 .feedback {
   display: none; border-radius: var(--radius-sm);
-  font-size: 16px; font-weight: 700; margin-top: 1rem; padding: 16px;
-  text-align: center; line-height: 1.6;
+  margin-top: 1rem; padding: 20px 16px; text-align: center;
 }
-.feedback.correct   { background: var(--green-light); color: var(--green); }
-.feedback.incorrect { background: var(--red-light);   color: var(--red); }
+.feedback.correct   { background: var(--green-light); }
+.feedback.incorrect { background: var(--red-light); }
 @keyframes popIn {
   0%   { transform: scale(0.85); opacity: 0; }
   60%  { transform: scale(1.04); }
   100% { transform: scale(1); opacity: 1; }
 }
 .feedback.show { display: block; animation: popIn 0.2s ease forwards; }
+.feedback-label {
+  font-size: 13px; font-weight: 600; margin-bottom: 6px;
+}
+.feedback.correct   .feedback-label { color: var(--green); }
+.feedback.incorrect .feedback-label { color: var(--red); }
+.feedback-letter {
+  font-size: 56px; font-weight: 800; line-height: 1;
+}
+.feedback.correct   .feedback-letter { color: var(--green); }
+.feedback.incorrect .feedback-letter { color: var(--red); }
 @keyframes streakPop {
   0%   { transform: scale(0) translateX(-50%); opacity: 0; }
   50%  { transform: scale(1.3) translateX(-50%) translateY(-8px); opacity: 1; }
@@ -188,15 +193,12 @@ input[type="text"]:focus, select:focus {
 .tag-a  { background: var(--blue-light);   color: var(--blue); }
 .tag-v  { background: var(--yellow-light); color: #92400e; }
 .divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
-
-/* Morse chips — ONLY used on instructions screen */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .chip {
   background: var(--purple-light); color: var(--purple);
   border: 1px solid rgba(124,58,237,0.2); border-radius: 50px;
   padding: 5px 12px; font-size: 13px; font-weight: 600; font-family: monospace;
 }
-
 .submit-status { font-size: 13px; text-align: center; margin-top: 0.75rem; min-height: 18px; color: var(--text-muted); }
 .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
 .title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem; }
@@ -268,7 +270,7 @@ input[type="text"]:focus, select:focus {
       <div class="divider"></div>
       <h3>What to do each trial</h3>
       <p id="instr-task"></p>
-      <p>After each answer you will be told the correct letter so you can learn as you go.</p>
+      <p>After each answer you will be shown the correct letter so you can learn as you go.</p>
       <div style="margin-top:1.5rem;">
         <button class="btn btn-primary" onclick="show('practice')">Got it — start practice!</button>
       </div>
@@ -300,13 +302,14 @@ input[type="text"]:focus, select:focus {
       <span id="block-badge" style="font-size:12px;font-weight:700;background:var(--purple-light);color:var(--purple);padding:4px 14px;border-radius:50px;">Block 1</span>
     </div>
     <div class="card" style="text-align:center;position:relative;" id="trial-card">
-      <!-- A-only: static circle that never changes -->
-      <div id="static-circle" style="display:none;"></div>
-      <!-- V and AV: flashing circle -->
-      <div id="flash-circle" style="display:none;"></div>
+      <div id="static-circle"></div>
+      <div id="flash-circle"></div>
       <div id="status-line">Get ready...</div>
       <input type="text" id="answer-input" maxlength="1" placeholder="?" disabled />
-      <div class="feedback" id="feedback"></div>
+      <div class="feedback" id="feedback">
+        <div class="feedback-label" id="feedback-label"></div>
+        <div class="feedback-letter" id="feedback-letter"></div>
+      </div>
     </div>
   </div>
 
@@ -349,7 +352,7 @@ input[type="text"]:focus, select:focus {
 
 </div>
 <script>
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7wkvxtVy1zR3Sbjp6tmrrl79w4f38U5aeTZ5QPEpfLIwba1PL668iJKIBr7J0kmKP/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrvN1seaQfDXxVkgAaG-kAY7D_e0usa0KAiDjkzVJykIHS93j7cs-m2cBiWyIyyukJ8A/exec';
 
 var MORSE  = { E:'.',T:'-',I:'..',A:'.-',N:'-.',M:'--',S:'...',R:'.-.',K:'-.-',F:'..-.' };
 var SUBSET = ['E','T','I','A','N','M','S','R','K','F'];
@@ -367,11 +370,9 @@ var S = {
   pid:'', session:1, condition:'AV',
   isPractice:false, idx:0,
   results:[], letter:'', morseEnd:0,
-  audioCtx:null, streak:0, xp:0, correct:0,
-  pendingBlock: 0
+  audioCtx:null, streak:0, xp:0, correct:0
 };
 
-// Wire up buttons that don't use inline onclick
 document.getElementById('keep-going-btn').addEventListener('click', function() {
   show('trial');
   nextTrial();
@@ -422,43 +423,37 @@ function goToInstructions() {
 
 function buildInstructions() {
   var c = S.condition;
-
   var tagClass = c === 'AV' ? 'tag-av' : (c === 'A' ? 'tag-a' : 'tag-v');
   var tagText  = c === 'AV' ? 'Your condition: Audio + Visual' : (c === 'A' ? 'Your condition: Audio only' : 'Your condition: Visual only');
   document.getElementById('instr-tag').innerHTML = '<span class="condition-tag ' + tagClass + '">' + tagText + '</span>';
 
   if (c === 'A') {
-    document.getElementById('instr-intro').textContent = 'In your condition you will only hear sounds. There will be no flashing or visual signals — just listen carefully.';
-    document.getElementById('dot-desc').textContent    = 'A short beep — lasts about 0.15 seconds.';
-    document.getElementById('dash-desc').textContent   = 'A long beep — lasts about 0.45 seconds. Three times longer than a dot.';
-    document.getElementById('instr-task').textContent  = 'Each trial a Morse code signal will play as sound. When it finishes, type the letter you think it was and press Enter.';
+    document.getElementById('instr-intro').textContent  = 'In your condition you will only hear sounds. There will be no flashing or visual signals — just listen carefully.';
+    document.getElementById('dot-desc').textContent     = 'A short beep — lasts about 0.15 seconds.';
+    document.getElementById('dash-desc').textContent    = 'A long beep — lasts about 0.45 seconds. Three times longer than a dot.';
+    document.getElementById('instr-task').textContent   = 'Each trial a Morse code signal will play as sound. When it finishes, type the letter you think it was and press Enter.';
   } else if (c === 'V') {
-    document.getElementById('instr-intro').textContent = 'In your condition you will only see the circle flash on screen. There will be no sounds at all — just watch the circle carefully.';
-    document.getElementById('dot-desc').textContent    = 'A short flash of the circle — brief and quick.';
-    document.getElementById('dash-desc').textContent   = 'A long flash of the circle — held for longer. Three times longer than a dot flash.';
-    document.getElementById('instr-task').textContent  = 'Each trial the circle will flash a Morse code signal. When it finishes, type the letter you think it was and press Enter.';
+    document.getElementById('instr-intro').textContent  = 'In your condition you will only see the circle flash on screen. There will be no sounds at all — just watch the circle carefully.';
+    document.getElementById('dot-desc').textContent     = 'A short flash of the circle — brief and quick.';
+    document.getElementById('dash-desc').textContent    = 'A long flash of the circle — held for longer. Three times longer than a dot flash.';
+    document.getElementById('instr-task').textContent   = 'Each trial the circle will flash a Morse code signal. When it finishes, type the letter you think it was and press Enter.';
   } else {
-    document.getElementById('instr-intro').textContent = 'In your condition you will both hear sounds and see the circle flash at the same time. Both signals carry the same information.';
-    document.getElementById('dot-desc').textContent    = 'A short beep and a short flash of the circle at the same time.';
-    document.getElementById('dash-desc').textContent   = 'A long beep and a long flash of the circle at the same time. Three times longer than a dot.';
-    document.getElementById('instr-task').textContent  = 'Each trial a Morse code signal will play as both sound and a flashing circle. When it finishes, type the letter you think it was and press Enter.';
+    document.getElementById('instr-intro').textContent  = 'In your condition you will both hear sounds and see the circle flash at the same time. Both signals carry the same information.';
+    document.getElementById('dot-desc').textContent     = 'A short beep and a short flash of the circle at the same time.';
+    document.getElementById('dash-desc').textContent    = 'A long beep and a long flash of the circle at the same time. Three times longer than a dot.';
+    document.getElementById('instr-task').textContent   = 'Each trial a Morse code signal will play as both sound and a flashing circle. When it finishes, type the letter you think it was and press Enter.';
   }
 }
 
 function startPracticeTrials() {
   S.isPractice = true; S.idx = 0;
-  setupCircles();
-  show('trial');
-  nextTrial();
+  setupCircles(); show('trial'); nextTrial();
 }
 
 function startMain() {
   S.isPractice = false; S.idx = 0;
   S.results = []; S.streak = 0; S.xp = 0; S.correct = 0;
-  updateHUD();
-  setupCircles();
-  show('trial');
-  nextTrial();
+  updateHUD(); setupCircles(); show('trial'); nextTrial();
 }
 
 function updateHUD() {
@@ -472,24 +467,16 @@ function nextTrial() {
   if (!S.isPractice) {
     if (S.idx > 0 && S.idx % TRIALS_PER_BLOCK === 0) {
       var b = S.idx / TRIALS_PER_BLOCK;
-      if (b < BLOCKS) {
-        showBreakScreen(b);
-        return;
-      }
+      if (b < BLOCKS) { showBreakScreen(b); return; }
     }
-    if (S.idx >= TOTAL) {
-      showDone();
-      return;
-    }
+    if (S.idx >= TOTAL) { showDone(); return; }
   }
-
   if (S.isPractice && S.idx >= PRACTICE) {
     document.querySelector('#screen-setup .card').innerHTML =
       '<div class="title-row"><span class="title-emoji">&#128640;</span><h1>Ready!</h1></div>' +
       '<p>Practice done. Now it counts — respond as fast and accurately as you can.</p>' +
       '<div style="margin-top:1.5rem;"><button class="btn btn-primary" onclick="startMain()">Begin experiment</button></div>';
-    show('setup');
-    return;
+    show('setup'); return;
   }
 
   S.letter = SUBSET[Math.floor(Math.random() * SUBSET.length)];
@@ -509,7 +496,9 @@ function nextTrial() {
   inp.value = ''; inp.disabled = true; inp.style.borderColor = 'var(--border)';
 
   var fb = document.getElementById('feedback');
-  fb.className = 'feedback'; fb.style.display = 'none'; fb.innerHTML = '';
+  fb.className = 'feedback'; fb.style.display = 'none';
+  document.getElementById('feedback-label').textContent  = '';
+  document.getElementById('feedback-letter').textContent = '';
 
   var fc = document.getElementById('flash-circle');
   fc.classList.remove('lit');
@@ -519,8 +508,7 @@ function nextTrial() {
   playMorse(S.letter, function() {
     S.morseEnd = performance.now();
     document.getElementById('status-line').textContent = 'Type the letter and press Enter';
-    inp.disabled = false;
-    inp.focus();
+    inp.disabled = false; inp.focus();
   });
 }
 
@@ -530,8 +518,7 @@ function playMorse(letter, onDone) {
   var doV  = (S.condition === 'V'  || S.condition === 'AV');
   var fc   = document.getElementById('flash-circle');
 
-  var t       = 0;
-  var actions = [];
+  var t = 0; var actions = [];
   for (var i = 0; i < code.length; i++) {
     var dur = code[i] === '.' ? DOT : DASH;
     actions.push({ time: t, type: 'on',  dur: dur });
@@ -565,8 +552,8 @@ function playTone(ctx, durationMs) {
   var attack  = Math.min(0.012, dur * 0.08);
   var release = Math.min(0.030, dur * 0.15);
   var sustain = Math.max(0, dur - attack - release);
-  var osc     = ctx.createOscillator();
-  var gain    = ctx.createGain();
+  var osc = ctx.createOscillator();
+  var gain = ctx.createGain();
   osc.connect(gain); gain.connect(ctx.destination);
   osc.type = 'sine';
   osc.frequency.setValueAtTime(700, now);
@@ -574,8 +561,7 @@ function playTone(ctx, durationMs) {
   gain.gain.linearRampToValueAtTime(0.5, now + attack);
   gain.gain.setValueAtTime(0.5, now + attack + sustain);
   gain.gain.linearRampToValueAtTime(0, now + attack + sustain + release);
-  osc.start(now);
-  osc.stop(now + dur + 0.02);
+  osc.start(now); osc.stop(now + dur + 0.02);
 }
 
 document.addEventListener('keydown', function(e) {
@@ -591,10 +577,13 @@ function recordAnswer(guess) {
   var correct = (guess === S.letter) ? 1 : 0;
   var fb      = document.getElementById('feedback');
   var inp     = document.getElementById('answer-input');
+  var lbl     = document.getElementById('feedback-label');
+  var letter  = document.getElementById('feedback-letter');
 
   if (correct) {
-    fb.className = 'feedback correct show';
-    fb.innerHTML = 'Correct! The letter was <strong style="font-size:24px;display:block;margin-top:4px;">' + S.letter + '</strong>';
+    fb.className   = 'feedback correct show';
+    lbl.textContent    = 'Correct!';
+    letter.textContent = S.letter;
     inp.style.borderColor = '#059669';
     if (!S.isPractice) {
       S.streak++;
@@ -603,8 +592,9 @@ function recordAnswer(guess) {
       if (S.streak >= 3) { showStreakFloat(); }
     }
   } else {
-    fb.className = 'feedback incorrect show';
-    fb.innerHTML = 'Not quite! You guessed <strong>' + guess + '</strong> — the correct letter was <strong style="font-size:24px;display:block;margin-top:4px;">' + S.letter + '</strong>';
+    fb.className   = 'feedback incorrect show';
+    lbl.textContent    = 'Not quite! You guessed ' + guess + ' — the correct letter was:';
+    letter.textContent = S.letter;
     inp.style.borderColor = '#dc2626';
     if (!S.isPractice) { S.streak = 0; }
   }
