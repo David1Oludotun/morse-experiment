@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="data:," />
 <title>Morse Code Learning Study</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -126,18 +127,15 @@ input[type="text"]:focus, select:focus {
   font-size: 14px; font-weight: 600; color: var(--text-muted);
   text-align: center; min-height: 22px; margin-bottom: 1rem;
 }
-.feedback {
-  display: none; border-radius: var(--radius-sm);
-  margin-top: 1rem; padding: 20px 16px; text-align: center;
-}
-.feedback.correct   { background: var(--green-light); }
-.feedback.incorrect { background: var(--red-light); }
+.feedback { border-radius: var(--radius-sm); margin-top: 1rem; padding: 20px 16px; text-align: center; display: none; }
+.feedback.correct   { display: block !important; background: var(--green-light); }
+.feedback.incorrect { display: block !important; background: var(--red-light); }
 @keyframes popIn {
   0%   { transform: scale(0.85); opacity: 0; }
   60%  { transform: scale(1.04); }
   100% { transform: scale(1); opacity: 1; }
 }
-.feedback.show { display: block; animation: popIn 0.2s ease forwards; }
+.feedback.correct, .feedback.incorrect { animation: popIn 0.2s ease forwards; }
 .feedback-label {
   font-size: 13px; font-weight: 600; margin-bottom: 6px;
 }
@@ -373,12 +371,14 @@ var S = {
   audioCtx:null, streak:0, xp:0, correct:0
 };
 
-document.getElementById('keep-going-btn').addEventListener('click', function() {
-  show('trial');
-  nextTrial();
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('keep-going-btn').addEventListener('click', function() {
+    show('trial');
+    nextTrial();
+  });
+  document.getElementById('submit-btn').addEventListener('click', function() { submitToSheet(); });
+  document.getElementById('csv-btn').addEventListener('click', function() { downloadCSV(); });
 });
-document.getElementById('submit-btn').addEventListener('click', function() { submitToSheet(); });
-document.getElementById('csv-btn').addEventListener('click', function() { downloadCSV(); });
 
 function handleSessionChange() {
   var s = parseInt(document.getElementById('session-num').value);
@@ -496,7 +496,8 @@ function nextTrial() {
   inp.value = ''; inp.disabled = true; inp.style.borderColor = 'var(--border)';
 
   var fb = document.getElementById('feedback');
-  fb.className = 'feedback'; fb.style.display = 'none';
+  fb.className = 'feedback';
+  fb.style.display = 'none';
   document.getElementById('feedback-label').textContent  = '';
   document.getElementById('feedback-letter').textContent = '';
 
@@ -581,7 +582,8 @@ function recordAnswer(guess) {
   var letter  = document.getElementById('feedback-letter');
 
   if (correct) {
-    fb.className   = 'feedback correct show';
+    fb.style.display = '';
+    fb.className   = 'feedback correct';
     lbl.textContent    = 'Correct!';
     letter.textContent = S.letter;
     inp.style.borderColor = '#059669';
@@ -592,7 +594,8 @@ function recordAnswer(guess) {
       if (S.streak >= 3) { showStreakFloat(); }
     }
   } else {
-    fb.className   = 'feedback incorrect show';
+    fb.style.display = '';
+    fb.className   = 'feedback incorrect';
     lbl.textContent    = 'Not quite! You guessed ' + guess + ' — the correct letter was:';
     letter.textContent = S.letter;
     inp.style.borderColor = '#dc2626';
